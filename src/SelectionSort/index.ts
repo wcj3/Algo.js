@@ -6,13 +6,13 @@
 // Not stable
 export default function<T>(
   elements: T[],
-  compareLessThan: (element: T, key: T) => Boolean
+  compareLessThan: (element: T, key: T) => number
 ) {
   for (let i = 0; i < elements.length; i++) {
     let min = i;
     for (let u = i + 1; u < elements.length; u++) {
       // invariant: a[i] is the smallest of a[u]...n elements
-      if (compareLessThan(elements[u], elements[min])) {
+      if (compareLessThan(elements[u], elements[min]) < 0) {
         min = u;
       }
     }

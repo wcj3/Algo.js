@@ -13,12 +13,12 @@
 
 export default function<T>(
   elements: T[],
-  compareLessThan: (element: T, key: T) => boolean
+  compareLessThan: (element: T, key: T) => number
 ): T[] {
   let exchanges = false;
   // finds smallest element and moves larger elements one position to the right
   for (let i = elements.length - 1; i > 0; i--) {
-    if (compareLessThan(elements[i], elements[i - 1])) {
+    if (compareLessThan(elements[i], elements[i - 1]) < 0) {
       const temp = elements[i - 1];
       elements[i - 1] = elements[i];
       elements[i] = temp;
@@ -33,7 +33,7 @@ export default function<T>(
     let j = i;
     // sort current index while it's less than index - 1 - 0
     // greater elements move to right one position until position is found (half-exchange)
-    while (compareLessThan(curr, elements[j - 1])) {
+    while (compareLessThan(curr, elements[j - 1]) < 0) {
       elements[j] = elements[j - 1];
       j--;
     }
