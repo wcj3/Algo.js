@@ -1,4 +1,4 @@
-import SelectionSort from "../index";
+import { SelectionSort } from "../SelectionSort";
 describe("Selection Sort", () => {
   it("should sort number", () => {
     expect(SelectionSort<number>([2, 4, 1, 3, 6], (a, b) => a - b)).toEqual([

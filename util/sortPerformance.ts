@@ -1,8 +1,9 @@
-import InsertionSort from "../src/InsertionSort";
-import SelectionSort from "../src/SelectionSort";
+import { HeapSort } from "../src/HeapSort/HeapSort";
+import { InsertionSort } from "../src/InsertionSort/InsertionSort";
+import { SelectionSort } from "../src/SelectionSort/SelectionSort";
 import { log } from "./log";
 
-const size = 2500;
+const size = 3500;
 const rand = () => Math.floor(Math.random() * size);
 
 function add(r, arr) {
@@ -20,8 +21,19 @@ function createArr() {
   }
   return arr;
 }
-const arr1 = createArr();
-const arr2 = [...arr1];
+let mockData, copy;
+const sorts = [HeapSort, InsertionSort, SelectionSort];
+
 console.log("Starting test...");
-log("InsertionSort", size, () => InsertionSort(arr1, (a, b) => a < b));
-log("SelectionSort", size, () => SelectionSort(arr2, (a, b) => a < b));
+for (let i = 0; i < 3; i++) {
+  let testData;
+  // Initialize test data
+  if (i === 0) {
+    mockData = createArr();
+    copy = [...mockData];
+  }
+  testData = [...copy];
+  log(sorts[i].name, size, () =>
+    sorts[i](testData, (a: number, b: number) => a - b)
+  );
+}
