@@ -1,4 +1,5 @@
-export function HeapSort<T>(data: T[], compare: (a: T, b: T) => number): T[] {
+import { compare } from "./../../util/interfaces";
+export function HeapSort<T>(data: T[], compare: compare<T>): T[] {
   let size = data.length - 1;
   let parent = Math.floor(size / 2);
   // heap construction

@@ -1,12 +1,10 @@
-export function SelectionSort<T>(
-  elements: T[],
-  compareLessThan: (element: T, key: T) => number
-) {
+import { compare } from "./../../util/interfaces";
+export function SelectionSort<T>(elements: T[], compare: compare<T>) {
   for (let i = 0; i < elements.length; i++) {
     let min = i;
     for (let u = i + 1; u < elements.length; u++) {
       // invariant: a[i] is the smallest of a[u]...n elements
-      if (compareLessThan(elements[u], elements[min]) < 0) {
+      if (compare(elements[u], elements[min]) < 0) {
         min = u;
       }
     }

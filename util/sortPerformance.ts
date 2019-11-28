@@ -1,9 +1,10 @@
 import { HeapSort } from "../src/HeapSort/HeapSort";
 import { InsertionSort } from "../src/InsertionSort/InsertionSort";
+import { QuickSort } from "../src/QuickSort/QuickSort";
 import { SelectionSort } from "../src/SelectionSort/SelectionSort";
-import { log } from "./log";
+import { timer } from "./timer";
 
-const size = 3500;
+const size = 5000;
 const rand = () => Math.floor(Math.random() * size);
 
 function add(r, arr) {
@@ -22,10 +23,10 @@ function createArr() {
   return arr;
 }
 let mockData, copy;
-const sorts = [HeapSort, InsertionSort, SelectionSort];
+const sorts = [HeapSort, InsertionSort, SelectionSort, QuickSort];
 
 console.log("Starting test...");
-for (let i = 0; i < 3; i++) {
+for (let i = 0; i < sorts.length; i++) {
   let testData;
   // Initialize test data
   if (i === 0) {
@@ -33,7 +34,7 @@ for (let i = 0; i < 3; i++) {
     copy = [...mockData];
   }
   testData = [...copy];
-  log(sorts[i].name, size, () =>
+  timer(sorts[i].name, size, () =>
     sorts[i](testData, (a: number, b: number) => a - b)
   );
 }
