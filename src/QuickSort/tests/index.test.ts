@@ -1,12 +1,13 @@
 import { QuickSort } from "../QuickSort";
 describe("QuickSort", () => {
   it("should sort numbers", () => {
-    expect(QuickSort<number>([2, 4, 1, 3, 6], (a, b) => a - b)).toEqual([
+    expect(QuickSort<number>([7, 6, 3, 1, 2, 4], (a, b) => a - b)).toEqual([
       1,
       2,
       3,
       4,
-      6
+      6,
+      7
     ]);
   });
 

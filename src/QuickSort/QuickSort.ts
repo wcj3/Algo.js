@@ -1,7 +1,11 @@
+import InsertionSort from "../InsertionSort";
 import { compare } from "./../../util/interfaces";
 export function QuickSort<T>(data: T[], compare: compare<T>) {
   let low = 0;
   let high = data.length - 1;
+  if (high < 15) {
+    InsertionSort(data, compare);
+  }
   sort(data, low, high, compare);
   return data;
 }
@@ -22,16 +26,12 @@ function partition(
 ): number {
   let left = low;
   let right = high;
-  const pivot = Math.floor((right + left) / 2);
+  const pivot = low;
   while (left < right) {
     // look for greater element
-    while (compare(data[left], data[pivot]) < 0) {
-      left++;
-    }
+    left = leftToRight(data, left, pivot, high, compare);
     // look for lesser elemenet
-    while (compare(data[right], data[pivot]) > 0) {
-      right--;
-    }
+    right = rightToLeft(data, right, pivot, low, compare);
     if (left >= right) {
       break;
     }
@@ -45,4 +45,30 @@ function exchange(data: any[], a: number, b: number) {
   const temp = data[a];
   data[a] = data[b];
   data[b] = temp;
+}
+
+function leftToRight(
+  data: any[],
+  left: number,
+  pivot: number,
+  bound: number,
+  compare: compare<any>
+) {
+  if (compare(data[left], data[pivot]) > 0 || left === bound) {
+    return left;
+  }
+  return leftToRight(data, ++left, pivot, bound, compare);
+}
+
+function rightToLeft(
+  data: any[],
+  right: number,
+  pivot: number,
+  bound: number,
+  compare: compare<any>
+) {
+  if (compare(data[right], data[pivot]) < 0 || right === bound) {
+    return right;
+  }
+  return rightToLeft(data, --right, pivot, bound, compare);
 }

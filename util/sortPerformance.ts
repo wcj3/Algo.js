@@ -4,7 +4,7 @@ import { QuickSort } from "../src/QuickSort/QuickSort";
 import { SelectionSort } from "../src/SelectionSort/SelectionSort";
 import { timer } from "./timer";
 
-const size = 5000;
+const size = 1000;
 const rand = () => Math.floor(Math.random() * size);
 
 function add(r, arr) {
