@@ -24,51 +24,27 @@ function partition(
   high: number,
   compare: compare<any>
 ): number {
-  let left = low;
-  let right = high;
-  const pivot = low;
-  while (left < right) {
-    // look for greater element
-    left = leftToRight(data, left, pivot, high, compare);
-    // look for lesser elemenet
-    right = rightToLeft(data, right, pivot, low, compare);
-    if (left >= right) {
-      break;
+  var pivot = data[Math.floor((high + low) / 2)];
+  let i = low; //left pointer
+  let j = high; //right pointer
+  while (i <= j) {
+    while (compare(data[i], pivot) < 0) {
+      i++;
     }
-    exchange(data, left, right);
+    while (compare(data[j], pivot) > 0) {
+      j--;
+    }
+    if (i <= j) {
+      exchange(data, i, j); //swap two elements
+      i++;
+      j--;
+    }
   }
-  exchange(data, low, right);
-  return right;
+  return i;
 }
 
 function exchange(data: any[], a: number, b: number) {
   const temp = data[a];
   data[a] = data[b];
   data[b] = temp;
-}
-
-function leftToRight(
-  data: any[],
-  left: number,
-  pivot: number,
-  bound: number,
-  compare: compare<any>
-) {
-  if (compare(data[left], data[pivot]) > 0 || left === bound) {
-    return left;
-  }
-  return leftToRight(data, ++left, pivot, bound, compare);
-}
-
-function rightToLeft(
-  data: any[],
-  right: number,
-  pivot: number,
-  bound: number,
-  compare: compare<any>
-) {
-  if (compare(data[right], data[pivot]) < 0 || right === bound) {
-    return right;
-  }
-  return rightToLeft(data, --right, pivot, bound, compare);
 }

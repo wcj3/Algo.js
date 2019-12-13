@@ -31,6 +31,6 @@ describe("QuickSort", () => {
         }
         return 0;
       })
-    ).toEqual(["alpha", "beta", "cat", "charlie"]);
+    ).toEqual(["alpha", "beta", "charlie", "cat"]);
   });
 });
