@@ -11,7 +11,7 @@ describe("QuickSort", () => {
     ]);
   });
 
-  it("should sort numbers scenario 2", () => {
+  it("should sort numbers scenario 2 (insertion)", () => {
     expect(QuickSort<number>([5, 1, 2, 3, 4], (a, b) => a - b)).toEqual([
       1,
       2,
@@ -19,6 +19,15 @@ describe("QuickSort", () => {
       4,
       5
     ]);
+  });
+
+  it("should sort numbers scenario 2 (quickSort)", () => {
+    expect(
+      QuickSort<number>(
+        [5, 1, 2, 3, 4, 6, 8, 7, 10, 9, 11, 14, 13, 12, 16, 15, 17],
+        (a, b) => a - b
+      )
+    ).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]);
   });
 
   it("should sort strings", () => {

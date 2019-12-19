@@ -4,21 +4,21 @@ import { QuickSort } from "../src/QuickSort/QuickSort";
 import { SelectionSort } from "../src/SelectionSort/SelectionSort";
 import { timer } from "./timer";
 
-const size = 3000;
-const rand = () => Math.floor(Math.random() * size);
+const sizeArg = +process.argv[2];
+const rand = size => Math.floor(Math.random() * size);
 
-function add(r, arr) {
+function add(r, arr, size) {
   if (arr.indexOf(r) !== -1) {
-    return add(rand(), arr);
+    return add(rand(size), arr, size);
   }
   return r;
 }
 
-function createArr() {
+function createArr(size) {
   const arr: number[] = [];
   for (let i = 0; i < size; i++) {
-    const r = rand();
-    arr.push(add(r, arr));
+    const r = rand(size);
+    arr.push(add(r, arr, size));
   }
   return arr;
 }
@@ -26,9 +26,8 @@ const sorts = [SelectionSort, InsertionSort, HeapSort, QuickSort];
 
 console.log("Starting test...");
 for (let i = 0; i < sorts.length; i++) {
-  let testData;
   // Initialize test data
-  timer(sorts[i].name, size, () =>
-    sorts[i](createArr(), (a: number, b: number) => a - b)
+  timer(sorts[i].name, sizeArg, () =>
+    sorts[i](createArr(sizeArg), (a: number, b: number) => a - b)
   );
 }

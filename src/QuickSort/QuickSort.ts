@@ -1,21 +1,44 @@
 import InsertionSort from "../InsertionSort";
 import { compare } from "./../../util/interfaces";
 export function QuickSort<T>(data: T[], compare: compare<T>) {
-  let low = 0;
-  let high = data.length - 1;
-  if (high < 15) {
+  const low = 0;
+  const high = data.length - 1;
+  if (data.length < 15) {
     InsertionSort(data, compare);
+  } else {
+    sort(data, low, high, compare);
   }
-  sort(data, low, high, compare);
   return data;
 }
 
 /* Helper funcs */
 function sort(data: any[], l: number, h: number, compare: compare<any>) {
-  if (h <= l) return;
+  if (l >= h) return;
+  const middle = Math.round((l + h) / 2);
+  const median = medianOfThree(data, l, middle, h, compare);
+  exchange(data, l, median);
   const stopAt = partition(data, l, h, compare);
   sort(data, l, stopAt - 1, compare);
   sort(data, stopAt + 1, h, compare);
+}
+
+function medianOfThree(
+  data: any[],
+  low: number,
+  middle: number,
+  high: number,
+  compare: any
+) {
+  if (compare(data[high], data[low]) < 0) {
+    exchange(data, high, low);
+  }
+  if (compare(data[middle], data[high]) > 0) {
+    exchange(data, middle, high);
+  }
+  if (compare(data[middle], data[low]) < 0) {
+    exchange(data, middle, low);
+  }
+  return middle;
 }
 
 function partition(
@@ -24,23 +47,24 @@ function partition(
   high: number,
   compare: compare<any>
 ): number {
-  var pivot = data[Math.floor((high + low) / 2)];
-  let i = low; //left pointer
-  let j = high; //right pointer
-  while (i <= j) {
-    while (compare(data[i], pivot) < 0) {
-      i++;
+  let left = low + 1;
+  let right = high;
+  // iterate left side until greater value is found
+  while (left < right) {
+    while (compare(data[left], data[low]) < 0) {
+      left++;
     }
-    while (compare(data[j], pivot) > 0) {
-      j--;
+    // iterate right until less value is found
+    while (compare(data[right], data[low]) > 0) {
+      right--;
     }
-    if (i <= j) {
-      exchange(data, i, j); //swap two elements
-      i++;
-      j--;
+    // swap only if indices haven't crossed
+    if (left < right) {
+      exchange(data, left, right);
     }
   }
-  return i;
+  exchange(data, low, right);
+  return right;
 }
 
 function exchange(data: any[], a: number, b: number) {
