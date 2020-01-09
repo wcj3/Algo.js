@@ -2,7 +2,7 @@ const { performance, PerformanceObserver } = require("perf_hooks");
 
 function timer(name: string, size: number, func: Function): Promise<any> {
   const promises: Promise<any>[] = [];
-  for (let i = 0; i < 9; i++) {
+  for (let i = 0; i < 8; i++) {
     promises.push(
       new Promise(resolve => {
         const wrapped = performance.timerify(func);

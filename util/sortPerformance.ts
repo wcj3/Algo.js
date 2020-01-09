@@ -1,6 +1,8 @@
 import { HeapSort } from "../src/HeapSort/HeapSort";
 import { InsertionSort } from "../src/InsertionSort/InsertionSort";
+import { MergeSort } from "../src/MergeSort";
 import { QuickSort } from "../src/QuickSort/QuickSort";
+import { QuickSort3 } from "../src/QuickSort/QuickSort3";
 import { SelectionSort } from "../src/SelectionSort/SelectionSort";
 import { timer } from "./timer";
 
@@ -22,7 +24,14 @@ function createArr(size) {
   }
   return arr;
 }
-const sorts = [SelectionSort, InsertionSort, HeapSort, QuickSort];
+const sorts = [
+  SelectionSort,
+  InsertionSort,
+  HeapSort,
+  QuickSort,
+  QuickSort3,
+  MergeSort
+];
 
 console.log("Starting test...");
 for (let i = 0; i < sorts.length; i++) {
