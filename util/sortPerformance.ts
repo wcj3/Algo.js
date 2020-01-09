@@ -5,8 +5,12 @@ import { QuickSort } from "../src/QuickSort/QuickSort";
 import { QuickSort3 } from "../src/QuickSort/QuickSort3";
 import { SelectionSort } from "../src/SelectionSort/SelectionSort";
 import { timer } from "./timer";
+// Supports -l for list of sorts and -s for size of array
 
-const sizeArg = +process.argv[2];
+const sizeIndex = process.argv.findIndex(e => e === "-d");
+const sizeArg = +process.argv[sizeIndex + 1];
+const listIndex = process.argv.findIndex(e => e === "-l");
+const compSorts = process.argv[listIndex + 1];
 const rand = size => Math.floor(Math.random() * size);
 
 function add(r, arr, size) {
@@ -24,14 +28,27 @@ function createArr(size) {
   }
   return arr;
 }
-const sorts = [
-  SelectionSort,
-  InsertionSort,
-  HeapSort,
-  QuickSort,
-  QuickSort3,
-  MergeSort
-];
+let sorts;
+const sortKeys = {
+  QuickSort: QuickSort,
+  QuickSort3: QuickSort3,
+  MergeSort: MergeSort,
+  HeapSort: HeapSort,
+  SelectionSort: SelectionSort,
+  InsertionSort: InsertionSort
+};
+if (listIndex > -1) {
+  sorts = compSorts.split(",").map(e => sortKeys[e]);
+} else {
+  sorts = [
+    SelectionSort,
+    InsertionSort,
+    HeapSort,
+    QuickSort,
+    QuickSort3,
+    MergeSort
+  ];
+}
 
 console.log("Starting test...");
 for (let i = 0; i < sorts.length; i++) {
