@@ -82,14 +82,14 @@ export class SinglyLinkedList<T> {
   reverse(): void {
     // precondition: a non-null list, will the head of the list already point to null
     // postcondition: a reversed list
-    function iterNode(node: Node<T> | null, next: Node<T> | null) {
-      // terminatite if next is null
+    function iterNode(prevNode: Node<T> | null, next: Node<T> | null) {
+      // terminate if next is null
       if (!next) {
-        this._head = node;
+        this._head = prevNode;
         return;
       }
       const nextNode = next.next;
-      next.next = node;
+      next.next = prevNode;
       return iterNode.call(this, next, nextNode);
     }
     if (this.head) {

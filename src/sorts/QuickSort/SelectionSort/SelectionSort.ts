@@ -1,4 +1,4 @@
-import { compare } from "./../../util/interfaces";
+import { compare } from "../../../utils/interfaces";
 export function SelectionSort<T>(elements: T[], compare: compare<T>) {
   for (let i = 0; i < elements.length; i++) {
     let min = i;

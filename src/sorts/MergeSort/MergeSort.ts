@@ -1,5 +1,5 @@
+import { compare } from "../../utils/interfaces";
 import InsertionSort from "../InsertionSort";
-import { compare } from "./../../util/interfaces";
 
 export function MergeSort<T>(data: T[], compare: compare<T>) {
   if (data.length < 15) {

@@ -1,4 +1,4 @@
-import { compare } from "./../../util/interfaces";
+import { compare } from "../../utils/interfaces";
 // InsertionSsort
 // Swaps and comparisons are always quadratic
 // Can be improved to be almost linear by adding conditional to loop test

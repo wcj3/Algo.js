@@ -1,10 +1,10 @@
-import { HeapSort } from "../src/HeapSort/HeapSort";
-import { InsertionSort } from "../src/InsertionSort/InsertionSort";
-import { MergeSort } from "../src/MergeSort";
-import { QuickSort } from "../src/QuickSort/QuickSort";
-import { QuickSort3 } from "../src/QuickSort/QuickSort3";
-import { SelectionSort } from "../src/SelectionSort/SelectionSort";
-import { timer } from "./timer";
+import { HeapSort } from "../src/sorts/HeapSort/HeapSort";
+import { InsertionSort } from "../src/sorts/InsertionSort/InsertionSort";
+import { MergeSort } from "../src/sorts/MergeSort";
+import { QuickSort } from "../src/sorts/QuickSort/QuickSort";
+import { QuickSort3 } from "../src/sorts/QuickSort/QuickSort3";
+import { SelectionSort } from "../src/sorts/QuickSort/SelectionSort/SelectionSort";
+import { timer } from "./Timer";
 // Supports -l for list of sorts and -s for size of array
 
 const sizeIndex = process.argv.findIndex(e => e === "-d");

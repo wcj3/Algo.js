@@ -1,4 +1,4 @@
-import { compare } from "./../../util/interfaces";
+import { compare } from "../../utils/interfaces";
 export function HeapSort<T>(data: T[], compare: compare<T>): T[] {
   let size = data.length - 1;
   let parent = Math.floor(size / 2);

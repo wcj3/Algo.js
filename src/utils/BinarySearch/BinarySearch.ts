@@ -13,7 +13,7 @@ function BinarySearch<T>(list: T[], key: T): number {
     key < list[mid] ? (high = mid - 1) : (low = mid + 1);
     return search(low, high);
   }
-  return search(0, list.length);
+  return search(0, list.length - 1);
 }
 
 export { BinarySearch };

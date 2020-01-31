@@ -1,4 +1,4 @@
-import { log } from "../../../util/timer";
+import { log } from "../../Timer";
 import { BinarySearch } from "../BinarySearch";
 
 const arr: number[] = [];

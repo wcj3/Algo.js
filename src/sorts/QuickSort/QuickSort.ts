@@ -1,5 +1,5 @@
+import { compare } from "../../utils/interfaces";
 import InsertionSort from "../InsertionSort";
-import { compare } from "./../../util/interfaces";
 export function QuickSort<T>(data: T[], compare: compare<T>) {
   const low = 0;
   const high = data.length - 1;
