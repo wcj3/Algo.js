@@ -1,3 +1,3 @@
-import SymbolTable from "./SymbolTable";
+import SymbolTable, { ISymbolTable } from "./SymbolTable";
 
-export { SymbolTable };
+export { SymbolTable, ISymbolTable };

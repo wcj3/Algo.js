@@ -16,12 +16,14 @@ function sort(data: any[], l: number, h: number, compare: compare<any>) {
   if (l >= h) return;
   const middle = Math.round((l + h) / 2);
   const median = medianOfThree(data, l, middle, h, compare);
+  // moves median back to
   exchange(data, l, median);
   const stopAt = partition(data, l, h, compare);
   sort(data, l, stopAt - 1, compare);
   sort(data, stopAt + 1, h, compare);
 }
 
+// selects an optimal pivot for an even split
 function medianOfThree(
   data: any[],
   low: number,
@@ -29,12 +31,15 @@ function medianOfThree(
   high: number,
   compare: any
 ) {
+  // swap high with low if lesser than low index
   if (compare(data[high], data[low]) < 0) {
     exchange(data, high, low);
   }
+  // swaps middle with high if greater than highest index
   if (compare(data[middle], data[high]) > 0) {
     exchange(data, middle, high);
   }
+  // swaps middle with low if less than lower index
   if (compare(data[middle], data[low]) < 0) {
     exchange(data, middle, low);
   }

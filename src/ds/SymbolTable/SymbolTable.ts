@@ -1,5 +1,13 @@
 // SymbolTable
 import { compare } from "../../utils/interfaces";
+
+export interface ISymbolTable<Key, Value> {
+  get(key: Key): void;
+  put(key: Key, value: Value): void;
+  size(): number;
+  delete(key: Key): void;
+  contains(key: Key): Key;
+}
 class SymbolTable<Key, Value> {
   private keys: Key[];
   private vals: Value[];

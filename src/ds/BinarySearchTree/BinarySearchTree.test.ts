@@ -50,11 +50,18 @@ describe("BinarySearchTree", () => {
   });
 
   describe("delete", () => {
-    it("should detete an element", () => {
+    it("should detete an element with no children", () => {
       bst.put(new BNode("a", 10));
       bst.put(new BNode("b", 20));
       bst.delete("b");
       expect(bst.print()).toBe("a");
+    });
+    it("should detete an element with one children", () => {
+      bst.put(new BNode("a", 10));
+      bst.put(new BNode("b", 20));
+      bst.put(new BNode("c", 20));
+      bst.delete("b");
+      expect(bst.print()).toBe("a,c");
     });
 
     it("should delete parent with 2 children", () => {
@@ -69,8 +76,9 @@ describe("BinarySearchTree", () => {
       bst.put(new BNode(14, 10));
       bst.put(new BNode(12, 10));
       bst.put(new BNode(16, 10));
+      bst.put(new BNode(15, 10));
       bst.delete(14);
-      expect(bst.print()).toBe("10,7,3,9,16,12");
+      expect(bst.print()).toBe("10,7,3,9,15,12,16");
     });
   });
 
