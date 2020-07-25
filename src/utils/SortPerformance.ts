@@ -1,17 +1,16 @@
-import { HeapSort } from "../src/sorts/HeapSort/HeapSort";
-import { InsertionSort } from "../src/sorts/InsertionSort/InsertionSort";
-import { MergeSort } from "../src/sorts/MergeSort";
-import { QuickSort } from "../src/sorts/QuickSort/QuickSort";
-import { QuickSort3 } from "../src/sorts/QuickSort/QuickSort3";
-import { SelectionSort } from "../src/sorts/QuickSort/SelectionSort/SelectionSort";
+import HeapSort from "../sorts/HeapSort";
+import InsertionSort from "../sorts/InsertionSort";
+import MergeSort from "../sorts/MergeSort";
+import QuickSort, { QuickSort3 } from "../sorts/QuickSort";
+import SelectionSort from "../sorts/SelectionSort";
 import { timer } from "./Timer";
 // Supports -l for list of sorts and -s for size of array
 
-const sizeIndex = process.argv.findIndex(e => e === "-d");
+const sizeIndex = process.argv.findIndex((e) => e === "-d");
 const sizeArg = +process.argv[sizeIndex + 1];
-const listIndex = process.argv.findIndex(e => e === "-l");
+const listIndex = process.argv.findIndex((e) => e === "-l");
 const compSorts = process.argv[listIndex + 1];
-const rand = size => Math.floor(Math.random() * size);
+const rand = (size) => Math.floor(Math.random() * size);
 
 function add(r, arr, size) {
   if (arr.indexOf(r) !== -1) {
@@ -35,10 +34,10 @@ const sortKeys = {
   MergeSort: MergeSort,
   HeapSort: HeapSort,
   SelectionSort: SelectionSort,
-  InsertionSort: InsertionSort
+  InsertionSort: InsertionSort,
 };
 if (listIndex > -1) {
-  sorts = compSorts.split(",").map(e => sortKeys[e]);
+  sorts = compSorts.split(",").map((e) => sortKeys[e]);
 } else {
   sorts = [
     SelectionSort,
@@ -46,7 +45,7 @@ if (listIndex > -1) {
     HeapSort,
     QuickSort,
     QuickSort3,
-    MergeSort
+    MergeSort,
   ];
 }
 

@@ -16,9 +16,7 @@ function sort(data: any[], l: number, h: number, compare: compare<any>) {
   if (l >= h) return;
   const middle = Math.round((l + h) / 2);
   const median = medianOfThree(data, l, middle, h, compare);
-  // moves median back to
-  exchange(data, l, median);
-  const stopAt = partition(data, l, h, compare);
+  const stopAt = partition(data, l, median, compare);
   sort(data, l, stopAt - 1, compare);
   sort(data, stopAt + 1, h, compare);
 }
@@ -40,6 +38,7 @@ function medianOfThree(
     exchange(data, middle, high);
   }
   // swaps middle with low if less than lower index
+  // this gets the pivot out of the way
   if (compare(data[middle], data[low]) < 0) {
     exchange(data, middle, low);
   }
@@ -52,7 +51,7 @@ function partition(
   high: number,
   compare: compare<any>
 ): number {
-  let left = low + 1;
+  let left = low;
   let right = high;
   // iterate left side until greater value is found
   while (left < right) {
@@ -68,8 +67,7 @@ function partition(
       exchange(data, left, right);
     }
   }
-  exchange(data, low, right);
-  return right;
+  return left;
 }
 
 function exchange(data: any[], a: number, b: number) {

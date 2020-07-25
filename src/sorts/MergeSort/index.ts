@@ -1,2 +1,2 @@
 import { MergeSort } from "./MergeSort";
-export { MergeSort };
+export default MergeSort;

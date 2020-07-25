@@ -1,5 +1,5 @@
 import { compare } from "../../utils/interfaces";
-export function SelectionSort<T>(elements: T[], compare: compare<T>) {
+export default function SelectionSort<T>(elements: T[], compare: compare<T>) {
   for (let i = 0; i < elements.length; i++) {
     let min = i;
     for (let u = i + 1; u < elements.length; u++) {

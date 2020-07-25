@@ -7,7 +7,7 @@
     "test": "jest",
     "test:watch": "jest --watchAll",
     "bundle": "rollup main.js --output.format umd --name 'myBundle' --output.file bundle.js",
-    "sort-perf": "ts-node util/sortPerformance.ts"
+    "sort-perf": "ts-node src/utils/sortPerformance.ts"
   },
   "jest": {
     "moduleFileExtensions": [
