@@ -6,46 +6,57 @@ export function MergeSort<T>(data: T[], compare: compare<T>) {
     InsertionSort(data, compare);
     return data;
   }
-  sort(data, compare);
+  const aux = new Array(data.length);
+  sort(data, aux, 0, data.length - 1, compare);
   return data;
 }
 
-function sort(data: any[], compare: compare<any>) {
+// divides the array into halves until optimal subproblem is reached
+function sort(
+  data: any[],
+  aux: any[],
+  leftIndex: number,
+  rightIndex: number,
+  compare: compare<any>
+) {
+  if (rightIndex <= leftIndex) return;
   let n = data.length;
-  const aux = new Array(data.length);
-  for (let len = 1; len < n; len *= 2) {
-    for (let low = 0; low < n - len; low += len + len) {
-      const mid = low + len - 1;
-      const high = Math.min(low + len + len - 1, n - 1);
-      merge(data, aux, low, mid, high, compare);
-    }
-  }
+  const mid = Math.floor((leftIndex + rightIndex) / 2);
+  sort(data, aux, leftIndex, mid, compare);
+  sort(data, aux, mid + 1, rightIndex, compare);
+  merge(data, aux, leftIndex, mid, mid + 1, rightIndex, compare);
 }
 
+// merges the left and right partitions
 function merge(
   data: any[],
   aux: any[],
-  low: number,
-  mid: number,
-  high: number,
+  leftStart: number,
+  leftEnd: number,
+  rightStart: number,
+  rightEnd: number,
   compare: compare<any>
 ) {
-  let lAux = low;
-  let hAux = mid + 1;
-  // copy to aux array
-  for (let i = low; i <= high; i++) {
+  // copy data array content to aux
+  for (let i = leftStart; i <= rightEnd; i++) {
     aux[i] = data[i];
   }
-
-  for (let i = low; i <= high; i++) {
-    if (lAux > mid) {
-      data[i] = aux[hAux++];
-    } else if (hAux > high) {
-      data[i] = aux[lAux++];
-    } else if (compare(aux[hAux], aux[lAux]) < 0) {
-      data[i] = aux[hAux++];
-    } else {
-      data[i] = aux[lAux++];
+  for (let i = leftStart; i <= rightEnd; i++) {
+    // use right index when left partition is out bounds
+    if (leftStart > leftEnd) {
+      data[i] = aux[rightStart++];
+    }
+    // use left index when right partition is out of bounds
+    else if (rightStart > rightEnd) {
+      data[i] = aux[leftStart++];
+    }
+    // use riht index if right partition is less than left
+    else if (compare(aux[rightStart], aux[leftStart]) < 0) {
+      data[i] = aux[rightStart++];
+    }
+    // default to right index
+    else {
+      data[i] = aux[leftStart++];
     }
   }
 }
