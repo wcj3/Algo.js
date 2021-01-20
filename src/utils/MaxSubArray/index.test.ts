@@ -55,4 +55,13 @@ describe("MaxSubArray", () => {
       sellIndex: 11,
     });
   });
+
+  it("should find max subarray", () => {
+    const arr = [100];
+    expect(MaxSubArray(arr)).toEqual({
+      start: 0,
+      end: 0,
+      sum: 100,
+    });
+  });
 });
