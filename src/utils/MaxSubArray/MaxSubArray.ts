@@ -8,8 +8,6 @@ function _MaxSubArray(
   high: number
 ): { start: number; end: number; sum: number } {
   if (high === low) return { start: low, end: high, sum: data[low] };
-  if (low === high - 1)
-    return { start: low, end: high, sum: data[high] - data[low] };
   const mid = Math.floor((low + high) / 2);
   let { start: leftLow, end: leftHigh, sum: leftSum } = _MaxSubArray(
     data,
@@ -68,29 +66,21 @@ function findMaxCrossingSubarray(
   let maxLeft = low;
   let maxRight = high;
   // check left partition maxValue (should capture begin of range)
-  if (low === mid) {
-    leftSum = 0;
-  } else {
-    for (let i = mid; i > 0; i--) {
-      sum += data[i] - data[i - 1];
-      if (sum > leftSum) {
-        leftSum = sum;
-        maxLeft = i - 1;
-      }
+  for (let i = mid; i >= 0; i--) {
+    sum += data[i];
+    if (sum > leftSum) {
+      leftSum = sum;
+      maxLeft = i;
     }
-    // reset sum
-    sum = 0;
   }
-  if (high === mid) {
-    rightSum = 0;
-  } else {
-    // check right partition maxValue (should capture end of range)
-    for (let i = mid + 1; i <= high; i++) {
-      sum += data[i] - data[i - 1];
-      if (sum > rightSum) {
-        rightSum = sum;
-        maxRight = i;
-      }
+  // reset sum
+  sum = 0;
+  // check right partition maxValue (should capture end of range)
+  for (let i = mid + 1; i <= high; i++) {
+    sum += data[i];
+    if (sum > rightSum) {
+      rightSum = sum;
+      maxRight = i;
     }
   }
 
