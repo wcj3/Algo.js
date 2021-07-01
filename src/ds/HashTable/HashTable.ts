@@ -41,7 +41,6 @@ export default class HashTable<K, V> {
 
   put(key: string | number, value: V) {
     const hash = this.hash(key);
-    console.log(hash);
     const node = new Node(key, value);
     // check for collision
     if (this.keys[hash]) {
@@ -66,7 +65,7 @@ export default class HashTable<K, V> {
   resize() {}
   print() {
     let str = "";
-    this.keys.forEach(node => {
+    this.keys.forEach((node) => {
       str += `${node.key}: [`;
       let n: any = node;
       while (n) {
